@@ -1,0 +1,72 @@
+# ===================================================================
+# General & OS Specific
+# ===================================================================
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+ehthumbs.db
+
+# ===================================================================
+# IDE Files - IntelliJ, VS Code, STS, Eclipse, NetBeans
+# ===================================================================
+.idea/
+*.iml
+*.iws
+*.ipr
+.classpath
+.project
+.settings
+.factorypath
+.springBeans
+.sts4-cache
+.vscode/
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# ===================================================================
+# Java & Maven Specific (for budget-manager)
+# ===================================================================
+# Compiled class files and packages
+budget-manager/target/
+budget-manager/pom.xml.tag
+budget-manager/pom.xml.releaseBackup
+budget-manager/pom.xml.versionsBackup
+budget-manager/pom.xml.next
+budget-manager/release.properties
+budget-manager/dependency-reduced-pom.xml
+budget-manager/buildNumber.properties
+
+# Log files
+*.log
+logs/
+
+# ===================================================================
+# Node.js & React Specific (for budget-manager-react)
+# ===================================================================
+# The entire node_modules directory is the most important to ignore
+budget-manager-react/node_modules/
+
+# Production build output
+budget-manager-react/build/
+
+# Log files
+budget-manager-react/npm-debug.log*
+budget-manager-react/yarn-debug.log*
+budget-manager-react/yarn-error.log*
+
+# Local environment variables
+budget-manager-react/.env.local
+budget-manager-react/.env.development.local
+budget-manager-react/.env.test.local
+budget-manager-react/.env.production.local
+
+# ===================================================================
+# Docker Specific (Optional but good practice)
+# ===================================================================
+# If you ever have local Docker data volumes you don't want to track
+# (This project uses named volumes in docker-compose, so this is less critical)
+docker-data/

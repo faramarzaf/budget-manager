@@ -1,0 +1,13 @@
+# Ignore the node_modules folder to prevent local permission issues
+# and to reduce the build context size.
+node_modules
+
+# Ignore the production build output folder (good practice)
+build
+
+# Ignore git files (good practice)
+.git
+.gitignore
+
+# Ignore local environment files (good practice)
+.env

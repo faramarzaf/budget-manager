@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database Service
+  db:
+    image: postgres:16-alpine
+    container_name: budget-db
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=supersecret
+      - POSTGRES_DB=budgetdb
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U admin -d budgetdb" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Backend Java Service
+  backend:
+    build:
+      # CORRECTION: Use './' to specify the current directory
+      context: ./budget-manager
+      dockerfile: Dockerfile
+    container_name: budget-backend
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/budgetdb
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=supersecret
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: on-failure
+
+    # Frontend React Service
+  frontend:
+    build:
+      context: ./budget-manager-react
+      dockerfile: Dockerfile
+    container_name: budget-frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      # THE CRITICAL CHANGE IS HERE:
+      # Instead of mounting the whole app, we ONLY mount the src folder.
+      # This gives us hot-reloading for the code we edit, without
+      # corrupting the container's node_modules or package.json.
+      - ./budget-manager-react/src:/app/src
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - REACT_APP_API_URL=http://localhost:8080
+
+volumes:
+  postgres_data:
