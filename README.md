@@ -56,4 +56,10 @@ The entire project is containerized with Docker, allowing for a simple, one-comm
     *   The **React frontend** will be available at `http://localhost:3000`.
     *   The **Java backend API** will be available at `http://localhost:8080`.
 
+
+
+![](/img1.png)
+![](/img2.png)
+![](/img3.png)
+![](/img4.png)
 ---
